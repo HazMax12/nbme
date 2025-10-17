@@ -48,15 +48,14 @@ h2{margin:0 0 18px;font-size:22px;color:#fff}
 .card h3{margin:6px 0 6px}
 .card p.lead{margin:0;color:var(--muted);font-size:14px}
 
-/* details: start hidden via height 0 and opacity 0 */
+/* details */
 .details{height:0;opacity:0;overflow:hidden;padding-top:0}
 .details .inner{padding-top:12px;color:var(--muted);font-size:13px;line-height:1.45}
 .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
 .tag{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700;font-size:12px}
 
-/* reveal initial state */
+/* reveal */
 .reveal{opacity:0;transform:translateY(18px)}
-/* contact */
 .contact{display:flex;align-items:center;gap:12px;justify-content:center}
 .discord{padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,#2563eb,#06b6d4);color:#fff;font-weight:700}
 footer{text-align:center;color:var(--muted);margin-top:28px}
@@ -189,6 +188,19 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
           </div>
         </article>
 
+        <!-- New Flow Network Card -->
+        <article class="card reveal" tabindex="0" role="button" aria-expanded="false">
+          <div class="meta"><span class="role">Helper</span> <span class="status active">Active</span></div>
+          <h3>Flow Network</h3>
+          <p class="lead">Peak 50 · Avg 25</p>
+          <div class="details" aria-hidden="true">
+            <div class="inner">
+              I assist players, answer questions, and help moderate the chat to keep it friendly and fair. I support staff in handling tickets and improving response times.
+              <div class="tags"><span class="tag">Moderation</span><span class="tag">Support</span><span class="tag">Tickets</span></div>
+            </div>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -214,10 +226,8 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <script>
-  // year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // softened particles (lightweight, low count)
   (function(){
     const c = document.getElementById('particles');
     const ctx = c.getContext('2d');
@@ -265,7 +275,6 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
     step();
   })();
 
-  // parallax softened
   (function(){
     const b1 = document.querySelector('.b1');
     const b2 = document.querySelector('.b2');
@@ -281,7 +290,6 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
     });
   })();
 
-  // GSAP: reveal on scroll
   gsap.registerPlugin(ScrollTrigger);
   gsap.utils.toArray('.reveal').forEach(card=>{
     gsap.fromTo(card, {y:18,opacity:0}, {
@@ -290,7 +298,6 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
     });
   });
 
-  // Card open/close with smooth height + fade using GSAP
   (function(){
     const cards = document.querySelectorAll('.card');
     function closeDetails(details){
@@ -301,11 +308,10 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
     function openDetails(details){
       if(!details) return;
       const inner = details.querySelector('.inner');
-      // measure natural height
       details.style.height = 'auto';
       details.style.opacity = '1';
       details.style.paddingTop = window.getComputedStyle(inner).paddingTop || '12px';
-      const targetH = inner.getBoundingClientRect().height + 12; // inner height + gap
+      const targetH = inner.getBoundingClientRect().height + 12;
       details.style.height = '0px';
       details.style.opacity = '0';
       details.style.paddingTop = '0px';
@@ -316,8 +322,7 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
 
     cards.forEach(card=>{
       const details = card.querySelector('.details');
-      card.addEventListener('click', (e)=>{
-        // ignore clicks on interactive elements (if present)
+      card.addEventListener('click', ()=>{
         const isOpen = details.getBoundingClientRect().height > 0 && details.style.height !== '0px' && details.style.height !== '';
         if(isOpen){
           card.setAttribute('aria-expanded','false');
@@ -336,7 +341,6 @@ footer{text-align:center;color:var(--muted);margin-top:28px}
       });
     });
 
-    // close all on Escape
     addEventListener('keydown', e=>{
       if(e.key === 'Escape'){
         cards.forEach(c=>{
