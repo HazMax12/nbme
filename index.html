@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Minecraft Staff Portfolio — nbme</title>
+  <title>Minecraft Staff Portfolio — Your Name</title>
   <meta name="description" content="Professional Minecraft server staff portfolio." />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
@@ -11,6 +11,7 @@
     *{box-sizing:border-box}
     html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial;color:#e6eef8;background:linear-gradient(180deg,var(--bg1),var(--bg2));overflow-x:hidden;scroll-behavior:smooth}
 
+    /* canvas + parallax layer */
     .bg-wrap{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
     canvas#particles{width:100%;height:100%;display:block}
     .parallax{position:absolute;inset:0;z-index:0;pointer-events:none}
@@ -18,42 +19,52 @@
     .b1{width:360px;height:360px;background:linear-gradient(135deg,#60a5fa,#7c3aed);left:-80px;top:-80px}
     .b2{width:260px;height:260px;background:linear-gradient(135deg,#34d399,#60a5fa);right:-100px;bottom:-120px}
 
+    /* container */
     .wrap{position:relative;z-index:2;max-width:var(--max-width);margin:36px auto;padding:28px}
     header{display:flex;align-items:center;justify-content:space-between;gap:20px}
     .logo{font-weight:800;color:var(--accent);font-size:22px}
-    nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-weight:600;transition:color .25s}
-    nav a.active{color:var(--accent)}
+    nav a{color:var(--muted);text-decoration:none;margin-left:16px;font-weight:600}
 
+    /* hero */
     .hero{margin:48px 0 36px;text-align:center}
     .hero h1{font-size:44px;margin:6px 0;letter-spacing:-1px}
     .hero p{color:var(--muted);max-width:720px;margin:10px auto 0}
 
-    section{margin:42px 0;padding:20px;border-radius:var(--card-radius);background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);
-      opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
-    section.visible{opacity:1;transform:translateY(0)}
+    /* sections */
+    section{margin:42px 0;padding:20px;border-radius:var(--card-radius);background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);}
     h2{margin:0 0 18px;font-size:24px;color:#fff}
 
+    /* projects grid */
     .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
     .card{position:relative;padding:18px;border-radius:12px;cursor:pointer;overflow:hidden;transition:transform .35s cubic-bezier(.2,.9,.3,1),box-shadow .35s;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
     .card:hover{transform:translateY(-8px)}
+
     .card .meta{font-size:13px;color:var(--muted);margin-bottom:8px}
     .role{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;margin-right:8px}
     .status{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px}
     .status.closed{background:rgba(var(--red),0.95);color:#fff}
     .status.active{background:rgba(var(--green),1);color:#052017}
     .status.resigned{background:rgba(var(--orange),1);color:#fff}
+
     .card h3{margin:8px 0 6px}
     .card p{margin:0;color:var(--muted);font-size:14px}
 
+    /* expandable area */
     .details{max-height:0;overflow:hidden;transition:max-height .45s ease;padding-right:6px}
     .details.open{max-height:320px}
     .details p{color:var(--muted);margin:10px 0;font-size:13px}
     .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
     .tag{padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700;font-size:12px}
 
+    /* reveal animation */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* contact */
     .contact{display:flex;align-items:center;gap:12px;justify-content:center}
     .discord{padding:10px 16px;border-radius:12px;background:linear-gradient(90deg,#2563eb,#06b6d4);color:#fff;font-weight:700}
 
+    /* responsive */
     @media (max-width:720px){.hero h1{font-size:28px}.wrap{padding:18px}} 
   </style>
 </head>
@@ -105,6 +116,66 @@
           </div>
         </article>
 
+        <article class="card reveal closed" data-status="closed" tabindex="0">
+          <div class="meta"><span class="role">Srmod</span> <span class="status closed">Closed</span></div>
+          <h3>Smacked</h3>
+          <p>Peak 60 · Avg 20</p>
+          <div class="details" aria-hidden="true">
+            <p>High-volume moderation and report handling. Coordinated screenshares and evidence review across staff channels.</p>
+            <div class="tags"><span class="tag">Reports</span><span class="tag">Evidence</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal resigned" data-status="resigned" tabindex="0">
+          <div class="meta"><span class="role">Helper</span> <span class="status resigned">Resigned</span></div>
+          <h3>Spawnlocked</h3>
+          <p>Peak 60 · Avg 20–30</p>
+          <div class="details" aria-hidden="true">
+            <p>Onboarded players, provided support, and assisted event hosts. Handled day-to-day queries and basic moderation.</p>
+            <div class="tags"><span class="tag">Support</span><span class="tag">Events</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal closed" data-status="closed" tabindex="0">
+          <div class="meta"><span class="role">Screensharer</span> <span class="status closed">Closed</span></div>
+          <h3>SwordzPvP</h3>
+          <p>Peak 30 · Avg 15</p>
+          <div class="details" aria-hidden="true">
+            <p>Performed cheat detection screenshares and provided evidence to senior staff. Documented findings for appeals and bans.</p>
+            <div class="tags"><span class="tag">Screenshares</span><span class="tag">Anti-cheat</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal closed" data-status="closed" tabindex="0">
+          <div class="meta"><span class="role">Jrmod</span> <span class="status closed">Closed</span></div>
+          <h3>GraceGens</h3>
+          <p>Peak 60 · Avg 30</p>
+          <div class="details" aria-hidden="true">
+            <p>Initial report triage, warnings, and Discord support. Collaborated with senior moderators for escalation.</p>
+            <div class="tags"><span class="tag">Triage</span><span class="tag">Discord</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal closed" data-status="closed" tabindex="0">
+          <div class="meta"><span class="role">Mod / Helper</span> <span class="status closed">Closed</span></div>
+          <h3>Darksbox</h3>
+          <p>Peak 30 · Avg 10</p>
+          <div class="details" aria-hidden="true">
+            <p>Moderation, scheduling, and player engagement. Assisted staff training and daily upkeep tasks.</p>
+            <div class="tags"><span class="tag">Scheduling</span><span class="tag">Engagement</span></div>
+          </div>
+        </article>
+
+        <article class="card reveal active" data-status="active" tabindex="0">
+          <div class="meta"><span class="role">Developer</span> <span class="status active">In Development</span></div>
+          <h3>Smacked Rebrand</h3>
+          <p>Not released</p>
+          <div class="details" aria-hidden="true">
+            <p>Built Discord bots and staff automation tools. Implemented verification flows and modular bot commands for moderation.</p>
+            <div class="tags"><span class="tag">Bots</span><span class="tag">Automation</span></div>
+          </div>
+        </article>
+
       </div>
     </section>
 
@@ -129,88 +200,89 @@
     // year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // particles
+    /* Particle system with mouse interaction */
     (function(){
-      const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
-      let W=canvas.width=innerWidth,H=canvas.height=innerHeight;
-      const DPR=Math.max(1,window.devicePixelRatio||1);
-      canvas.width=innerWidth*DPR;canvas.height=innerHeight*DPR;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.scale(DPR,DPR);
-      const particles=[];const MAX=Math.floor((W*H)/70000);
-      const mouse={x:W/2,y:H/2,rad:120,down:false};
+      const canvas = document.getElementById('particles');
+      const ctx = canvas.getContext('2d');
+      let W = canvas.width = innerWidth; let H = canvas.height = innerHeight;
+      const DPR = Math.max(1,window.devicePixelRatio||1);
+      canvas.width = innerWidth * DPR; canvas.height = innerHeight * DPR; canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px'; ctx.scale(DPR,DPR);
+
+      const particles = []; const MAX = Math.floor((W*H)/70000);
+      const mouse = {x:W/2,y:H/2,rad:120,down:false};
+
       function rand(a,b){return Math.random()*(b-a)+a}
-      function init(){particles.length=0;for(let i=0;i<MAX;i++){particles.push({x:rand(0,W),y:rand(0,H),vx:rand(-0.4,0.4),vy:rand(-0.4,0.4),r:rand(1.2,2.6)})}}
-      function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;canvas.width=innerWidth*DPR;canvas.height=innerHeight*DPR;canvas.style.width=innerWidth+'px';canvas.style.height=innerHeight+'px';ctx.scale(DPR,DPR);init();}
+      function init(){particles.length=0; for(let i=0;i<MAX;i++){particles.push({x:rand(0,W),y:rand(0,H),vx:rand(-0.4,0.4),vy:rand(-0.4,0.4),r:rand(1.2,2.6)})}}
+
+      function resize(){W=canvas.width=innerWidth;H=canvas.height=innerHeight;canvas.width = innerWidth * DPR; canvas.height = innerHeight * DPR; canvas.style.width = innerWidth+'px'; canvas.style.height = innerHeight+'px'; ctx.scale(DPR,DPR); init();}
       addEventListener('resize',resize);
+
       addEventListener('mousemove',e=>{mouse.x=e.clientX;mouse.y=e.clientY});
-      addEventListener('mousedown',()=>{mouse.down=true});addEventListener('mouseup',()=>{mouse.down=false});
+      addEventListener('mousedown',()=>{mouse.down=true}); addEventListener('mouseup',()=>{mouse.down=false});
+
       function step(){ctx.clearRect(0,0,W,H);
-        for(let i=0;i<particles.length;i++){const p=particles[i];
-          for(let j=i+1;j<particles.length;j++){const q=particles[j];const dx=p.x-q.x,dy=p.y-q.y;const d=dx*dx+dy*dy;if(d<20000){const a=1-d/20000;ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(59,130,246,'+(a*0.08)+')';ctx.lineWidth=0.9;ctx.stroke();}}}
-        for(const p of particles){let dx=p.x-mouse.x,dy=p.y-mouse.y;let dist=Math.sqrt(dx*dx+dy*dy);
-          if(dist<(mouse.rad+30)){const force=(1-dist/(mouse.rad+30))*(mouse.down?2:0.6);p.vx+=(dx/dist)*force*0.12;p.vy+=(dy/dist)*force*0.12;}
-          p.x+=p.vx;p.y+=p.vy;p.vx*=0.98;p.vy*=0.98;
-          if(p.x<0||p.x>W)p.vx*=-1;if(p.y<0||p.y>H)p.vy*=-1;
-          ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba(59,130,246,0.95)';ctx.fill();}
-        requestAnimationFrame(step);}
-      init();step();
+        // connections
+        for(let i=0;i<particles.length;i++){
+          const p=particles[i];
+          for(let j=i+1;j<particles.length;j++){
+            const q=particles[j]; const dx=p.x-q.x, dy=p.y-q.y; const d=dx*dx+dy*dy; if(d<20000){
+              const a=1 - d/20000; ctx.beginPath(); ctx.moveTo(p.x,p.y); ctx.lineTo(q.x,q.y); ctx.strokeStyle='rgba(59,130,246,'+ (a*0.08) +')'; ctx.lineWidth=0.9; ctx.stroke(); }
+          }
+        }
+        // particles
+        for(const p of particles){
+          let dx = p.x-mouse.x, dy = p.y-mouse.y; let dist = Math.sqrt(dx*dx+dy*dy);
+          if(dist < (mouse.rad+30)){
+            const force = (1 - dist/(mouse.rad+30)) * (mouse.down?2:0.6);
+            p.vx += (dx/dist) * force * 0.12;
+            p.vy += (dy/dist) * force * 0.12;
+          }
+          p.x += p.vx; p.y += p.vy; p.vx *= 0.98; p.vy *= 0.98;
+          if(p.x<0||p.x>W) p.vx *= -1; if(p.y<0||p.y>H) p.vy *= -1;
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(59,130,246,0.95)'; ctx.fill();
+        }
+        requestAnimationFrame(step);
+      }
+
+      init(); step();
     })();
 
-    // parallax blobs
+    /* Parallax blobs follow mouse slightly */
     (function(){
-      const b1=document.querySelector('.b1'),b2=document.querySelector('.b2');
-      addEventListener('mousemove',e=>{
-        const cx=innerWidth/2,cy=innerHeight/2;const dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
-        b1.style.transform=`translate3d(${dx*20}px,${dy*20}px,0) scale(1.02)`;
-        b2.style.transform=`translate3d(${dx*-18}px,${dy*-14}px,0) scale(1.01)`;
+      const b1 = document.querySelector('.b1'); const b2 = document.querySelector('.b2');
+      addEventListener('mousemove', e => {
+        const cx = innerWidth/2, cy = innerHeight/2; const dx=(e.clientX-cx)/cx; const dy=(e.clientY-cy)/cy;
+        b1.style.transform = `translate3d(${dx*20}px,${dy*20}px,0) scale(1.02)`;
+        b2.style.transform = `translate3d(${dx*-18}px,${dy*-14}px,0) scale(1.01)`;
       });
     })();
 
-    // reveal on scroll (sections)
-    const fadeObs=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting)entry.target.classList.add('visible');
-      });
-    },{threshold:0.15});
-    document.querySelectorAll('section').forEach(sec=>fadeObs.observe(sec));
-
-    // expandable cards
+    /* Reveal on scroll */
     (function(){
-      const cards=document.querySelectorAll('.card');
+      const obs = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')} });},{threshold:0.12});
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    })();
+
+    /* Expandable cards */
+    (function(){
+      const cards = document.querySelectorAll('.card');
       function toggle(card){
-        const details=card.querySelector('.details');const isOpen=details.classList.contains('open');
+        const details = card.querySelector('.details'); const isOpen = details.classList.contains('open');
+        // close all
         document.querySelectorAll('.details.open').forEach(d=>d.classList.remove('open'));
-        if(!isOpen){details.classList.add('open');details.setAttribute('aria-hidden','false');
+        if(!isOpen){details.classList.add('open'); details.setAttribute('aria-hidden','false');
+          // smooth scroll into view a bit
           setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'center'}),160);
-        }else{details.classList.remove('open');details.setAttribute('aria-hidden','true');}
+        } else {details.classList.remove('open'); details.setAttribute('aria-hidden','true');}
       }
       cards.forEach(card=>{
-        card.addEventListener('click',e=>{if(e.target.tagName.toLowerCase()!=='a')toggle(card);});
-        card.addEventListener('keypress',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle(card);}});
+        card.addEventListener('click',e=>{ if(e.target.tagName.toLowerCase()!=='a') toggle(card); });
+        card.addEventListener('keypress',e=>{ if(e.key==='Enter'||e.key===' ') { e.preventDefault(); toggle(card); } });
       });
     })();
 
-    // close with escape
-    addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelectorAll('.details.open').forEach(d=>d.classList.remove('open'));}});
-
-    // smooth nav scroll + active highlight
-    document.querySelectorAll('nav a[href^="#"]').forEach(link=>{
-      link.addEventListener('click',e=>{
-        e.preventDefault();
-        const target=document.querySelector(link.getAttribute('href'));
-        if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
-      });
-    });
-
-    const sections=document.querySelectorAll('main section[id]');
-    const navLinks=document.querySelectorAll('nav a');
-    const observer=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+entry.target.id));
-        }
-      });
-    },{threshold:0.3});
-    sections.forEach(section=>observer.observe(section));
+    /* keyboard: close open details with Escape */
+    addEventListener('keydown',e=>{ if(e.key==='Escape'){ document.querySelectorAll('.details.open').forEach(d=>d.classList.remove('open')); } });
   </script>
 </body>
 </html>
